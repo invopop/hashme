@@ -27,15 +27,53 @@ Or install it yourself as:
 Create a class, include the `Hashme` module, and define some properties:
 
 ````ruby
+# Our cat class!
 class Cat
   include Hashme
 
-  property :name
-  property :description
-
+  property :name,        String
+  property :description, String
 end
+
+# Do something with it
+kitty = Cat.new(:name => "Catso", :description => "Meows a lot")
+kitty.name     # Catso
+kitty.to_hash  # {:name => "Catso", :description => "Meows a lot"}
+kitty.to_json  # "{\"name\":\"Catso\",\"description\":\"Meows a lot\"}"
+
+kitty2 = Cat.new(kitty.to_hash)
+kitty2.to_hash == kitty.to_hash  # true!
 ````
 
+Models can also be nested, which is probably the most useful part:
+
+````ruby
+# A kennel full of kitties
+class Kennel
+  include Hashme
+
+  property :name,      String
+  property :location,  Point
+  property :cats,      [Cat]
+end
+
+# Build a kennel
+kennel = Kennel.new(:name => "Goaway Kitty Home", :location => Point.new(40.333,-3.4555))
+
+# Add a kitten using an object
+kennel << kitty
+
+# Add a new cat using a raw hash
+kennel << {
+  :name => "Felix",
+  :description => "Black and white"
+}
+
+# Serialize and deserialize to recreate the whole structure
+store = kennel.to_hash
+kennel = Kennel.new(store)
+kennel.cats.length == 2    # true!
+````
 
 ## Contributing
 
@@ -48,3 +86,10 @@ end
 ## Authors
 
  * Sam Lown <me@samlown.com>
+
+## History
+
+### 0.1.0 - 2014-01-15
+
+ * First release!
+
