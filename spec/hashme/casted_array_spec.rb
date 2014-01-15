@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Hashme::CastedArray do
 
   let :owner do
-    mock()
+    double()
   end
 
   let :submodel do

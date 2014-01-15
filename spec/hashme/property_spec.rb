@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Hashme::Property do
 
   let :owner do
-    mock()
+    double()
   end
 
   let :klass do
