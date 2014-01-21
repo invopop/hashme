@@ -89,6 +89,10 @@ kennel.cats.length == 2    # true!
 
 ## History
 
+### 0.1.1 - 2014-01-21
+ 
+ * Fixing dependency on ActiveModel >= 3.0
+
 ### 0.1.0 - 2014-01-15
 
  * First release!
