@@ -2,6 +2,11 @@ module Hashme
   module Properties
     extend ActiveSupport::Concern
 
+    included do
+      class_attribute :properties
+      self.properties = {}
+    end
+
     def get_attribute(name)
       self[name]
     end
@@ -17,6 +22,15 @@ module Hashme
 
     protected
 
+    # Go through each property and make sure it has a default value.
+    def set_defaults
+      (self.class.properties || {}).each do |key, property|
+        unless property.default.nil?
+          self[property.name] = property.default
+        end
+      end
+    end
+
     # Internal method to go through each attribute and set the
     # values via the set_attribute method.
     def set_attributes(attrs = {})
@@ -28,36 +42,18 @@ module Hashme
     private
     
     def get_property(name)
-      # not only search in the class, search in the superclass too if the superclass can respond to properties[]. Using a class method for this
-      self.class.search_property(name)
+      self.class.properties[name.to_sym]
     end
 
     module ClassMethods
 
-      attr_accessor :properties
-
       def property(*args)
-        self.properties ||= {}
-
         # Prepare the property object and methods
         property = Property.new(*args)
-        properties[property.name] = property
+        self.properties = properties.merge(property.name => property)
         define_property_methods(property)
 
         property
-      end
-      
-      # Recursive search the property in the superclass chain
-      def search_property(name)        
-        name = name.to_sym
-        
-        if properties[name]
-          properties[name]
-        elsif superclass.respond_to?(:search_property)
-          superclass.search_property(name)
-        else
-          nil
-        end
       end
 
       protected

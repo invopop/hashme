@@ -30,7 +30,8 @@ module Hashme
   end
 
   def initialize(attrs = {})
-    # Use the `Properties` module's `#set_attribtues` method
+    # Use the `Properties` module's methods
+    set_defaults
     set_attributes(attrs)
   end
 

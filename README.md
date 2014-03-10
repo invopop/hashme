@@ -6,7 +6,7 @@ Hashme helps you create simple models that allow you to initialize and
 generate hashes that you can serialize and store as you wish.
 
 Its a bit like ActiveRecord, but without all the messy database stuff,
-and of course you can nest to you're hearts content.
+and of course you can nest to you're heart's content.
 
 ## Installation
 
@@ -88,6 +88,11 @@ kennel.cats.length == 2    # true!
  * Sam Lown <me@samlown.com>
 
 ## History
+
+### 0.1.2 - 2014-03-10
+
+ * Set default property values on object initialization.
+ * Refactoring to use `class_atrribute` for properties hash for improved inheritance.
 
 ### 0.1.1 - 2014-01-21
  

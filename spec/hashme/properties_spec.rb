@@ -51,11 +51,21 @@ describe Hashme::Properties do
       @model.properties.class.should eql(Hash)
     end
 
-    it "should be null if no properties" do
+    it "should be empty if no properties" do
       model = Class.new do
         include Hashme
       end
-      model.properties.should be_nil
+      model.properties.should be_empty
+    end
+
+    it "should be inherited from parent models" do
+      mod = Class.new(@model) do
+        property :surname, String
+      end
+      mod.properties.keys.should include(:name)
+      mod.properties.keys.should include(:surname)
+      # Make sure we don't update the parent!
+      @model.properties.keys.should_not include(:surname)
     end
 
   end
@@ -96,6 +106,5 @@ describe Hashme::Properties do
     end
 
   end
-
 
 end

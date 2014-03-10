@@ -32,6 +32,13 @@ describe Hashme do
       @obj.name.should eql("Sam")
     end
 
+    it "should set default values so they are accessible by hash" do
+      @model.property :surname, String, :default => "Nowl"
+      @obj = @model.new
+      @obj.to_hash[:surname].should eql('Nowl')
+    end
+
+
   end
 
 end
