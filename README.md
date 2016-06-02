@@ -33,16 +33,18 @@ class Cat
 
   property :name,        String
   property :description, String
+  property :dob,         Date
 end
 
 # Do something with it
-kitty = Cat.new(:name => "Catso", :description => "Meows a lot")
+kitty = Cat.new(:name => "Catso", :description => "Meows a lot", :dob => '2012-02-03')
 kitty.name     # Catso
-kitty.to_hash  # {:name => "Catso", :description => "Meows a lot"}
-kitty.to_json  # "{\"name\":\"Catso\",\"description\":\"Meows a lot\"}"
+kitty.to_hash  # {:name => "Catso", :description => "Meows a lot", :dob => "2012-02-03"}
+kitty.to_json  # "{\"name\":\"Catso\",\"description\":\"Meows a lot\",\"dob\":\"2012-02-03\"}"
 
 kitty2 = Cat.new(kitty.to_hash)
 kitty2.to_hash == kitty.to_hash  # true!
+kitty2.dob.is_a?(Date)           # true!
 ````
 
 Models can also be nested, which is probably the most useful part:
@@ -75,6 +77,24 @@ kennel = Kennel.new(store)
 kennel.cats.length == 2    # true!
 ````
 
+Active Model Validation is included out the box:
+
+````ruby
+class User
+  include Hashme
+
+  property :name,      String
+  property :email,     String
+
+  validates :name, :email, presence: true
+end
+
+u = User.new(name: "Sam")
+u.valid?           # false !
+u.errors.first     # [:email, "can't be blank"]
+````
+
+
 ## Contributing
 
 1. Fork it
@@ -89,10 +109,16 @@ kennel.cats.length == 2    # true!
 
 ## History
 
+### 0.2.0 - 2016-06-02
+
+ * Added support for advanced type casting, copy stuff from CouchRest Model.
+ * Upgrade to latest rspec version.
+ * Removed `Property#cast` and switch to just `Property#build`.
+
 ### 0.1.2 - 2014-03-10
 
  * Set default property values on object initialization.
- * Refactoring to use `class_atrribute` for properties hash for improved inheritance.
+ * Refactoring to use `class_attribute` for properties hash for improved inheritance.
 
 ### 0.1.1 - 2014-01-21
  

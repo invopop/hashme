@@ -20,7 +20,7 @@ module Hashme
       :encode_json, :as_json, :to_json,
       :inspect, :any?
 
-    def initialize(owner, property, values = [])
+    def initialize(property, owner, values = [])
       @_array = []
       self.casted_by = owner
       self.casted_by_property = property
@@ -54,7 +54,7 @@ module Hashme
     protected
 
     def instantiate_and_build(obj)
-      casted_by_property.build(casted_by, obj)
+      casted_by_property.build(self, obj)
     end
 
   end

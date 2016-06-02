@@ -11,10 +11,10 @@ describe Hashme do
   
   describe '.build' do
     it "should create a Model and give a block to build it" do
-      @model.should_receive(:call_in_block)
+      expect(@model).to receive(:call_in_block)
       @model.build do |model|
         @model.call_in_block
-        model.should be_kind_of(@model)
+        expect(model).to be_kind_of(@model)
       end
     end
   end
@@ -29,15 +29,14 @@ describe Hashme do
 
     it "should accept and set attributes" do
       @obj = @model.new(:name => "Sam")
-      @obj.name.should eql("Sam")
+      expect(@obj.name).to eql("Sam")
     end
 
     it "should set default values so they are accessible by hash" do
       @model.property :surname, String, :default => "Nowl"
       @obj = @model.new
-      @obj.to_hash[:surname].should eql('Nowl')
+      expect(@obj.to_hash[:surname]).to eql('Nowl')
     end
-
 
   end
 

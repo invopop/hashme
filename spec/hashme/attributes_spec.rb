@@ -22,21 +22,20 @@ describe Hashme::Attributes do
     end
 
     it "should assign some of the basic hash methods" do
-      (@obj == @hash).should be_true
-      @obj.eql?(@hash).should be_true
-      @obj.keys.should eql(@hash.keys)
-      @obj.values.should eql(@hash.values)
-      @obj.to_hash.should eql(@hash)
+      expect(@obj == @hash).to be_truthy
+      expect(@obj.keys).to eql(@hash.keys)
+      expect(@obj.values).to eql(@hash.values)
+      expect(@obj.to_hash).to eql(@hash)
     end
   end
 
   describe "#[]=" do
     it "should assign values to attributes hash" do
       @obj[:akey] = "test"
-      attribs[:akey].should eql("test")
+      expect(attribs[:akey]).to eql("test")
       @obj['akey'] = "anothertest"
-      attribs[:akey].should eql("anothertest")
-      attribs['akey'].should be_nil
+      expect(attribs[:akey]).to eql("anothertest")
+      expect(attribs['akey']).to be_nil
     end
   end
 
@@ -44,7 +43,7 @@ describe Hashme::Attributes do
     it "should remove attribtue entry" do
       @obj[:key] = 'value'
       @obj.delete(:key)
-      @obj[:key].should be_nil
+      expect(@obj[:key]).to be_nil
     end
   end
 
@@ -52,7 +51,7 @@ describe Hashme::Attributes do
     it "should duplicate attributes" do
       @obj[:key] = 'value'
       @obj2 = @obj.dup
-      @obj2.send(:_attributes).object_id.should_not eql(@obj.send(:_attributes).object_id)
+      expect(@obj2.send(:_attributes).object_id).to_not eql(@obj.send(:_attributes).object_id)
     end
   end
 
@@ -60,7 +59,7 @@ describe Hashme::Attributes do
     it "should clone attributes" do
       @obj[:key] = 'value'
       @obj2 = @obj.clone
-      @obj2.send(:_attributes).object_id.should_not eql(@obj.send(:_attributes).object_id)
+      expect(@obj2.send(:_attributes).object_id).to_not eql(@obj.send(:_attributes).object_id)
     end
   end
 
@@ -70,7 +69,7 @@ describe Hashme::Attributes do
     it "should provide something useful" do
       @obj[:key1] = 'value1'
       @obj[:key2] = 'value2'
-      @obj.inspect.should match(/#<.+ key1: "value1", key2: "value2">/)
+      expect(@obj.inspect).to match(/#<.+ key1: "value1", key2: "value2">/)
     end
 
   end

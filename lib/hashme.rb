@@ -16,6 +16,7 @@ require "hashme/castable"
 require "hashme/casted_array"
 require "hashme/properties"
 require "hashme/property"
+require "hashme/property_casting"
 
 module Hashme
   extend ActiveSupport::Concern

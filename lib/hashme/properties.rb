@@ -16,7 +16,7 @@ module Hashme
       if property.nil?
         self[name.to_sym] = value
       else
-        self[property.name] = value.present? ?  property.cast(self, value) : value
+        self[property.name] = property.build(self, value)
       end
     end
 
