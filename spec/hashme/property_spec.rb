@@ -60,13 +60,6 @@ describe Hashme::Property do
         expect(obj.class).to eql(Time)
         expect(obj).to eql(Time.utc(2013, 6, 2, 12, 0, 0))
       end
-
-      it "should assign casted by and property" do
-        prop = subject.new(:item, submodel)
-        obj = prop.build(owner, {:name => 'test'})
-        expect(obj.casted_by).to eql(owner)
-        expect(obj.casted_by_property).to eql(prop)
-      end
     end
 
     context "with an array" do

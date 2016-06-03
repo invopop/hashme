@@ -25,9 +25,8 @@ describe Hashme::CastedArray do
       expect(@obj.length).to eql(1)
     end
 
-    it "should set owner and property" do
-      expect(@obj.casted_by).to eql(owner)
-      expect(@obj.casted_by_property).to eql(property)
+    it "should set property" do
+      expect(@obj.property).to eql(property)
     end
 
     it "should instantiate and cast each value" do
@@ -49,9 +48,6 @@ describe Hashme::CastedArray do
       expect(subject.last.class).to eql(submodel)
       expect(subject.first.name).to eql('test')
       expect(subject.last.name).to eql('test2')
-
-      expect(subject.last.casted_by).to be(subject)
-      expect(subject.last.casted_by_property).to eql(property)
     end
 
   end

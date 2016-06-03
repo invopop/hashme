@@ -12,7 +12,6 @@ require "active_support/json"
 # Local dependencies
 
 require "hashme/attributes"
-require "hashme/castable"
 require "hashme/casted_array"
 require "hashme/properties"
 require "hashme/property"
@@ -26,7 +25,6 @@ module Hashme
   include Validations
 
   included do
-    include Castable
     include Attributes
     include Properties
   end

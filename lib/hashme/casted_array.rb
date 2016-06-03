@@ -10,7 +10,8 @@ module Hashme
   #
   class CastedArray
     extend Forwardable
-    include Castable
+
+    attr_reader :property
 
     def_delegators :@_array,
       :to_a, :==, :eql?, :size,
@@ -22,8 +23,7 @@ module Hashme
 
     def initialize(property, owner, values = [])
       @_array = []
-      self.casted_by = owner
-      self.casted_by_property = property
+      @property = property
       if values.respond_to?(:each)
         values.each do |value|
           self.push(value)
@@ -54,7 +54,7 @@ module Hashme
     protected
 
     def instantiate_and_build(obj)
-      casted_by_property.build(self, obj)
+      property.build(self, obj)
     end
 
   end

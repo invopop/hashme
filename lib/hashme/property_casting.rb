@@ -18,11 +18,7 @@ module Hashme
       elsif CASTABLE_TYPES.include?(type)
         send('typecast_to_'+type.to_s.downcase, value)
       else
-        # Complex objects we don't know how to cast
-        type.new(value).tap do |obj|
-          obj.casted_by = owner if obj.respond_to?(:casted_by=)
-          obj.casted_by_property = property if obj.respond_to?(:casted_by_property=)
-        end
+        type.new(value)
       end
     end
 
