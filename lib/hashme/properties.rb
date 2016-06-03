@@ -13,11 +13,13 @@ module Hashme
 
     def set_attribute(name, value)
       property = get_property(name)
-      if property.nil?
-        self[name.to_sym] = value
-      else
+      if property
         self[property.name] = property.build(self, value)
       end
+    end
+
+    def attributes=(attrs = {})
+      set_attributes(attrs)
     end
 
     protected

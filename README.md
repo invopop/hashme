@@ -118,6 +118,11 @@ u.errors.first     # [:email, "can't be blank"]
 
 ## History
 
+### 0.2.2 - 2016-06-04
+
+ * Removing support for setting attributes without a property.
+ * Adding a `attributes=` method.
+
 ### 0.2.1 - 2016-06-03
 
  * Support for embedded document validation.
