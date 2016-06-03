@@ -118,6 +118,10 @@ u.errors.first     # [:email, "can't be blank"]
 
 ## History
 
+### 0.2.5 - 2016-06-03 - Again!
+
+ * Adding support for deleting attributes by setting them to nil to keep output clean.
+
 ### 0.2.4 - 2016-06-03
 
  * Removing `casted_by` property, due to lack of use case and complication it causes.

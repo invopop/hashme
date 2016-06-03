@@ -43,6 +43,14 @@ describe Hashme::Properties do
       obj.set_attribute(:name, name)
       expect(obj[:name]).to eql(name)
     end
+
+    it "should delete attribute set to nil" do
+      obj.name = "test"
+      expect(obj.name).to eql("test")
+      obj.name = nil
+      expect(obj.name).to be_nil
+      expect(obj.keys.map(&:to_s)).to_not include('name')
+    end
   end
 
   describe "#attribtues=" do
