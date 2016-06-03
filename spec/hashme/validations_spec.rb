@@ -37,6 +37,7 @@ describe Hashme::Validations do
         include Hashme
         def self.name; "Example"; end
         property :sub, submod
+        property :subs, [submod]
       end
     end
 
@@ -56,6 +57,14 @@ describe Hashme::Validations do
       expect(obj.errors[:sub]).to_not be_empty
       expect(obj.sub.errors).to_not be_empty
       expect(obj.sub.errors[:email]).to_not be_empty
+    end
+
+    it "should valid attributes with casted array" do
+      obj = subject.new(subs: [{}])
+      expect(obj).to_not be_valid
+      expect(obj.errors[:subs]).to_not be_empty
+      expect(obj.subs.first.errors).to_not be_empty
+      expect(obj.subs.first.errors[:email]).to_not be_empty
     end
 
   end

@@ -15,7 +15,7 @@ module Hashme
     def_delegators :@_array,
       :to_a, :==, :eql?, :size,
       :first, :last, :at, :length,
-      :each, :reject, :empty?, :map,
+      :each, :reject, :empty?, :map, :collect,
       :clear, :pop, :shift, :delete, :delete_at,
       :encode_json, :as_json, :to_json,
       :inspect, :any?

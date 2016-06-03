@@ -118,7 +118,11 @@ u.errors.first     # [:email, "can't be blank"]
 
 ## History
 
-### 0.2.2 - 2016-06-04
+### 0.2.3 - 2016-06-03
+
+ * Fixing bug with validation on CastedArrays
+
+### 0.2.2 - 2016-06-03
 
  * Removing support for setting attributes without a property.
  * Adding a `attributes=` method.
