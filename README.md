@@ -8,6 +8,15 @@ generate hashes that you can serialize and store as you wish.
 Its a bit like ActiveRecord, but without all the messy database stuff,
 and of course you can nest to you're heart's content.
 
+A few situations where you might find Hashme useful:
+
+ * parsing incoming data from an API,
+ * defining documents that will be stored and reloaded from a file system, or,
+ * using a "json" field in a relational database with a bit more structure.
+
+Hashme adheres to ActiveModel and includes support validation, even of nested
+attributes with a `valid?` method.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -108,6 +117,10 @@ u.errors.first     # [:email, "can't be blank"]
  * Sam Lown <me@samlown.com>
 
 ## History
+
+### 0.2.1 - 2016-06-03
+
+ * Support for embedded document validation.
 
 ### 0.2.0 - 2016-06-02
 

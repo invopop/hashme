@@ -17,17 +17,18 @@ require "hashme/casted_array"
 require "hashme/properties"
 require "hashme/property"
 require "hashme/property_casting"
+require "hashme/validations/casted_attribute_validator"
+require "hashme/validations"
 
 module Hashme
   extend ActiveSupport::Concern
 
-  include ActiveModel::Validations
+  include Validations
 
   included do
     include Castable
     include Attributes
     include Properties
-    # Eventually! include Validations
   end
 
   def initialize(attrs = {})

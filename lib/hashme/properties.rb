@@ -52,7 +52,7 @@ module Hashme
         property = Property.new(*args)
         self.properties = properties.merge(property.name => property)
         define_property_methods(property)
-
+        prepare_validation(property)
         property
       end
 
@@ -66,6 +66,12 @@ module Hashme
         # Setter
         define_method "#{property.name}=" do |value|
           set_attribute(property.name, value)
+        end
+      end
+
+      def prepare_validation(property)
+        if property.type.method_defined?(:valid?)
+          validates_casted_attributes property.name
         end
       end
 
