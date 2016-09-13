@@ -8,7 +8,7 @@ Hashme helps you create simple models that allow you to initialize and
 generate hashes that you can serialize and store as you wish.
 
 Its a bit like ActiveRecord, but without all the messy database stuff,
-and of course you can nest to you're heart's content.
+and of course you can nest models to you're heart's content.
 
 A few situations where you might find Hashme useful:
 
