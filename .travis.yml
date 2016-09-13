@@ -1,6 +1,5 @@
 language: ruby
 gemfile:
-  - Gemfile # Whatever the latest default is
   - Gemfile.activemodel-4.x
   - Gemfile.activemodel-5.x
 rvm:
