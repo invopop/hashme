@@ -1,5 +1,7 @@
 # Hashme
 
+[![Build Status](https://travis-ci.org/samlown/hashme.png)](https://travis-ci.org/samlown/hashme)
+
 Hashes are great, but sometimes you need a bit more structure.
 
 Hashme helps you create simple models that allow you to initialize and
@@ -117,6 +119,10 @@ u.errors.first     # [:email, "can't be blank"]
  * Sam Lown <me@samlown.com>
 
 ## History
+
+### 0.2.6 - pending
+
+ * Setting ActiveModel minimum to 4.0, adding travis config to test both 4.0 and 5.0. (@samlown)
 
 ### 0.2.5 - 2016-06-03 - Again!
 

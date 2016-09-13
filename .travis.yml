@@ -1,0 +1,24 @@
+language: ruby
+gemfile:
+  - Gemfile # Whatever the latest default is
+  - Gemfile.activemodel-4.x
+  - Gemfile.activemodel-5.x
+rvm:
+  - 2.0.0
+  - 2.1.10
+  - 2.2.4
+  - 2.3.0
+  - jruby
+  - rbx
+before_install:
+  - gem install bundler
+env:
+  - JRUBY_OPTS=--2.0
+matrix:
+  allow_failures:
+    - rvm: 2.0.0
+      gemfile: Gemfile.activemodel-5.x
+    - rvm: 2.1.10
+      gemfile: Gemfile.activemodel-5.x
+    - rvm: jruby
+      gemfile: Gemfile.activemodel-5.x
