@@ -2,7 +2,7 @@ require 'spec_helper'
 
 class Course
   include Hashme
-  
+
   property :title, String
   property :participants, [Object]
   property :ends_at, Time
@@ -506,6 +506,18 @@ describe Hashme::PropertyCasting do
         expect(course.started_on.month).to eql(12)
         expect(course.started_on.day).to eql(20)
         expect(course.started_on.year).to eql(2006)
+      end
+
+      it 'parses date with wrong formatted year (ensure consider the beginning of string)' do
+        course.started_on = 'abc02016-10-03'
+        expect(course['started_on'].month).to eql(10)
+        expect(course['started_on'].day).to eql(03)
+        expect(course['started_on'].year).to eql(2016)
+      end
+
+      it 'does not typecast wrongly formatted dates (ensure consider the end of string)' do
+        course.started_on = '2016-10-030'
+        expect(course['started_on']).to be_nil
       end
     end
 
