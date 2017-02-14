@@ -71,13 +71,13 @@ class Kennel
 end
 
 # Build a kennel
-kennel = Kennel.new(:name => "Goaway Kitty Home", :location => Point.new(40.333,-3.4555))
+kennel = Kennel.new(:name => "Goaway Kitty Home", :location => Point.new(40.333,-3.4555), :cats => [])
 
 # Add a kitten using an object
-kennel << kitty
+kennel.cats << kitty
 
 # Add a new cat using a raw hash
-kennel << {
+kennel.cats << {
   :name => "Felix",
   :description => "Black and white"
 }
