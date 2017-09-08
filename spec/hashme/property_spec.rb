@@ -36,6 +36,11 @@ describe Hashme::Property do
       prop = subject.new(:name, String, :default => "Freddo")
       expect(prop.default).to eql("Freddo")
     end
+
+    it "should accept a default option from a Proc" do
+      prop = subject.new(:name, String, :default => -> { "Freddo" })
+      expect(prop.default).to eql("Freddo")
+    end
   end
 
   describe "#to_s" do
