@@ -123,6 +123,7 @@ u.errors.first     # [:email, "can't be blank"]
 ### 0.2.6 - pending
 
  * Setting ActiveModel minimum to 4.0, adding travis config to test both 4.0 and 5.0. (@samlown)
+ * Adding support for using `Proc` type as default values for properties
 
 ### 0.2.5 - 2016-06-03 - Again!
 

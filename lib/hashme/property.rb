@@ -1,7 +1,7 @@
 module Hashme
   class Property
 
-    attr_reader :name, :type, :default, :array
+    attr_reader :name, :type, :array
 
     def initialize(name, type, opts = {})
       @name = name.to_sym
@@ -25,6 +25,11 @@ module Hashme
 
     def to_sym
       name
+    end
+
+    def default
+      return @default.call if @default.is_a?(Proc)
+      @default
     end
 
     # Build a new object of the type defined by the property.
