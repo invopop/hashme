@@ -603,14 +603,14 @@ describe Hashme::PropertyCasting do
     [ true, 'true', 'TRUE', '1', 1, 't', 'T' ].each do |value|
       it "returns true when value is #{value.inspect}" do
         course.active = value
-        expect(course['active']).to be_truthy
+        expect(course['active']).to be(true)
       end
     end
 
     [ false, 'false', 'FALSE', '0', 0, 'f', 'F' ].each do |value|
       it "returns false when value is #{value.inspect}" do
         course.active = value
-        expect(course['active']).to be_falsey
+        expect(course['active']).to be(false)
       end
     end
 
