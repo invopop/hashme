@@ -1,5 +1,8 @@
 module Hashme
 
+  # Alias TrueClass as Boolean, so that it can be used as property types
+  Boolean = TrueClass
+
   # Special property casting for reveiving data from sources without Ruby types, such as query
   # parameters from an API or JSON documents.
   #

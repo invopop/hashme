@@ -12,7 +12,7 @@ class Course
   property :started_on, Date
   property :updated_at, DateTime
   property :active, TrueClass
-  property :very_active, TrueClass
+  property :very_active, Boolean
   property :klass, Class
   property :currency, String, :default => 'EUR'
   property :symbol, Symbol
@@ -599,7 +599,7 @@ describe Hashme::PropertyCasting do
     end
   end
 
-  describe 'when type primitive is a Boolean' do
+  describe 'when type primitive is a TrueClass' do
 
     [ true, 'true', 'TRUE', '1', 1, 't', 'T' ].each do |value|
       it "returns true when value is #{value.inspect}" do
@@ -621,6 +621,12 @@ describe Hashme::PropertyCasting do
         expect(course['active']).to be_nil
       end
     end
+
+    it "supports Boolean as an alias of TrueClass" do
+      course.very_active = 't'
+      expect(course['very_active']).to be(true)
+    end
+
   end
 
   describe 'when type primitive is an URI' do
