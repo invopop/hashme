@@ -7,7 +7,7 @@ module Hashme
   module PropertyCasting
     extend self
 
-    CASTABLE_TYPES = [String, Symbol, TrueClass, Integer, Float, BigDecimal, DateTime, Time, Date, Class]
+    CASTABLE_TYPES = [String, Symbol, TrueClass, Integer, Float, BigDecimal, DateTime, Time, Date, Class, URI]
 
     # Automatically typecast the provided value into an instance of the provided type.
     def cast(property, owner, value)
@@ -183,6 +183,13 @@ module Hashme
     def typecast_to_class(value)
       value.to_s.constantize
     rescue NameError
+      nil
+    end
+
+    # Typecast a value to URI
+    def typecast_to_uri(value)
+      URI(value)
+    rescue ArgumentError
       nil
     end
 
