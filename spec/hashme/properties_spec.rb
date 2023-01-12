@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Hashme::Properties do
-  
+
   before :all do
     @aux_model = Class.new do
       include Hashme
@@ -111,7 +111,7 @@ describe Hashme::Properties do
       obj.desc = "test"
       expect(obj.desc).to eql("test")
     end
-    
+
     it "should return nil on property with no default" do
       model.property :nickname, String
       expect(obj.nickname).to be_nil

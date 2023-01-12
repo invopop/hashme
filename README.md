@@ -158,7 +158,7 @@ u.errors.first     # [:email, "can't be blank"]
  * Refactoring to use `class_attribute` for properties hash for improved inheritance.
 
 ### 0.1.1 - 2014-01-21
- 
+
  * Fixing dependency on ActiveModel >= 3.0
 
 ### 0.1.0 - 2014-01-15

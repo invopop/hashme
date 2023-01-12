@@ -1,7 +1,7 @@
 module Hashme
   module Attributes
     include Enumerable
-    
+
     extend Forwardable
 
     def_delegators :_attributes, :to_a,

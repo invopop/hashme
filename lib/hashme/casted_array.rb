@@ -42,7 +42,7 @@ module Hashme
     def unshift(obj)
       @_array.unshift(instantiate_and_build(obj))
     end
-    
+
     def [] index
       @_array[index]
     end
@@ -50,7 +50,7 @@ module Hashme
     def []= index, obj
       @_array[index] = instantiate_and_build(obj)
     end
-    
+
     protected
 
     def instantiate_and_build(obj)

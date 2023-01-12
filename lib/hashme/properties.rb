@@ -45,9 +45,9 @@ module Hashme
         set_attribute(key, value)
       end
     end
-    
+
     private
-    
+
     def get_property(name)
       self.class.properties[name.to_sym]
     end

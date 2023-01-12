@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Hashme do
-  
+
   before :each do
     @model = Class.new do
       include Hashme
       property :name, String
     end
   end
-  
+
   describe '.build' do
     it "should create a Model and give a block to build it" do
       expect(@model).to receive(:call_in_block)
