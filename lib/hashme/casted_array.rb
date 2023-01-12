@@ -2,56 +2,83 @@ require 'forwardable'
 
 module Hashme
 
-  # The Hashme CastedArray is a special object wrapper that allows other Model's
-  # or Objects to be stored in an array, but maintaining typecasting.
-  class CastedArray
-    extend Forwardable
-
+  # The Hashme CastedArray is a special Array that typecasts each item according to a given property
+  class CastedArray < Array
     attr_reader :property
 
-    def_delegators :@_array,
-      :to_a, :==, :eql?, :size,
-      :first, :last, :at, :length,
-      :each, :reject, :empty?, :map, :collect,
-      :clear, :pop, :shift, :delete, :delete_at,
-      :encode_json, :as_json, :to_json,
-      :inspect, :any?
-
-    def initialize(property, values = [])
-      @_array = []
+    def initialize(property, vals = [])
       @property = property
-      if values.respond_to?(:each)
-        values.each do |value|
-          self.push(value)
+      super build_all(vals)
+    end
+
+    def <<(val)
+      super build(val)
+    end
+
+    def push(*vals)
+      super *build_all(vals)
+    end
+
+    alias append push
+
+    def concat(*arrays)
+      super *arrays.map { |array| build_all(array) }
+    end
+
+    def insert(index, *vals)
+      super index, *build_all(vals)
+    end
+
+    def unshift(*vals)
+      super *build_all(vals)
+    end
+
+    alias prepend unshift
+
+    def replace(array)
+      super build_all(array)
+    end
+
+    def []=(*args)
+      args = args.dup
+      args[-1] = build(args[-1])
+      super *args
+    end
+
+    def fill(*args, &block)
+      if block
+        super *args do |index|
+          val = block.call(index)
+          build(val)
         end
+      else
+        args = args.dup
+        args[0] = build(args[0])
+        super *args
       end
     end
 
-    def <<(obj)
-      @_array << instantiate_and_build(obj)
+    def collect!(&block)
+      if block
+        super do |element|
+          val = block.call(element)
+          build(val)
+        end
+      else
+        super
+      end
     end
 
-    def push(obj)
-      @_array.push(instantiate_and_build(obj))
-    end
-
-    def unshift(obj)
-      @_array.unshift(instantiate_and_build(obj))
-    end
-
-    def [] index
-      @_array[index]
-    end
-
-    def []= index, obj
-      @_array[index] = instantiate_and_build(obj)
-    end
+    alias map! collect!
 
     protected
 
-    def instantiate_and_build(obj)
-      property.build(obj)
+    def build_all(vals)
+      vals.map { |val| build(val) }
     end
 
+    def build(val)
+      property.build(val)
+    end
   end
 end
