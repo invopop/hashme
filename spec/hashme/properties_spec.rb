@@ -39,7 +39,7 @@ describe Hashme::Properties do
     it "should set and cast attribute with property" do
       property = model.send(:properties)[:name]
       name = "Fred Flinstone"
-      expect(property).to receive(:build).with(obj, name).and_return(name)
+      expect(property).to receive(:build).with(name).and_return(name)
       obj.set_attribute(:name, name)
       expect(obj[:name]).to eql(name)
     end

@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe Hashme::CastedArray do
-  let :owner do
-    double()
-  end
-
   let :submodel do
     Class.new do
       include Hashme
@@ -17,7 +13,7 @@ describe Hashme::CastedArray do
   end
 
   subject do
-    Hashme::CastedArray.new(property, owner, [{:name => 'test'}])
+    Hashme::CastedArray.new(property, [{:name => 'test'}])
   end
 
   describe "#initialize" do

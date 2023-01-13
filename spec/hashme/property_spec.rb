@@ -6,10 +6,6 @@ describe Hashme::Property do
     described_class
   end
 
-  let :owner do
-    double()
-  end
-
   let :submodel do
     Class.new do
       include Hashme
@@ -61,7 +57,7 @@ describe Hashme::Property do
     context "without an array" do
       it "should build a new object" do
         prop = subject.new(:date, Time)
-        obj = prop.build(owner, "2013-06-02T12:00:00Z")
+        obj = prop.build("2013-06-02T12:00:00Z")
         expect(obj.class).to eql(Time)
         expect(obj).to eql(Time.utc(2013, 6, 2, 12, 0, 0))
       end
@@ -70,13 +66,13 @@ describe Hashme::Property do
     context "with an array" do
       it "should convert regular array to casted array" do
         prop = subject.new(:dates, [Time])
-        obj = prop.build(owner, ["2013-06-02T12:00:00"])
+        obj = prop.build(["2013-06-02T12:00:00"])
         expect(obj.class).to eql(Hashme::CastedArray)
         expect(obj.first.class).to eql(Time)
       end
       it "should handle complex objects" do
         prop = subject.new(:items, [submodel])
-        obj = prop.build(owner, [{:name => 'test'}])
+        obj = prop.build([{:name => 'test'}])
         expect(obj.class).to eql(Hashme::CastedArray)
         expect(obj.first.class).to eql(submodel)
         expect(obj.first.name).to eql('test')
