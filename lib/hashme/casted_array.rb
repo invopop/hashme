@@ -3,11 +3,7 @@ require 'forwardable'
 module Hashme
 
   # The Hashme CastedArray is a special object wrapper that allows other Model's
-  # or Objects to be stored in an array, but maintain casted ownership.
-  #
-  # Adding objects will automatically assign the Array's owner, as opposed
-  # to the array itself.
-  #
+  # or Objects to be stored in an array, but maintaining typecasting.
   class CastedArray
     extend Forwardable
 
@@ -21,7 +17,7 @@ module Hashme
       :encode_json, :as_json, :to_json,
       :inspect, :any?
 
-    def initialize(property, owner, values = [])
+    def initialize(property, values = [])
       @_array = []
       @property = property
       if values.respond_to?(:each)
@@ -54,7 +50,7 @@ module Hashme
     protected
 
     def instantiate_and_build(obj)
-      property.build(self, obj)
+      property.build(obj)
     end
 
   end

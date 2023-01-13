@@ -14,7 +14,7 @@ module Hashme
     def set_attribute(name, value)
       property = get_property(name)
       if property
-        value = property.build(self, value)
+        value = property.build(value)
         if value.nil?
           delete(property.name)
         else

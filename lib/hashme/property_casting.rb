@@ -10,7 +10,7 @@ module Hashme
     CASTABLE_TYPES = [String, Symbol, TrueClass, Integer, Float, BigDecimal, DateTime, Time, Date, Class]
 
     # Automatically typecast the provided value into an instance of the provided type.
-    def cast(property, owner, value)
+    def cast(property, value)
       return nil if value.nil?
       type = property.type
       if value.instance_of?(type) || type == Object
