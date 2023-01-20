@@ -33,11 +33,11 @@ module Hashme
     end
 
     # Build a new object of the type defined by the property.
-    def build(owner, value)
+    def build(value)
       if array && value.is_a?(Array)
-        CastedArray.new(self, owner, value)
+        CastedArray.new(self, value)
       else
-        PropertyCasting.cast(self, owner, value)
+        PropertyCasting.cast(self, value)
       end
     end
 
