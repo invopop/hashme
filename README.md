@@ -120,6 +120,13 @@ u.errors.first     # [:email, "can't be blank"]
 
 ## History
 
+### 0.3.0 - 2023-01-23
+
+* Making `CastArray` provide the whole `Array` API by inherityin from it
+* Removing default value fallback to fix bug with booleans
+* Adding support for `URI` objects typecasting
+* Adding `Boolean` as an alias of `TrueClass`
+
 ### 0.2.6 - 2017-09-12
 
  * Setting ActiveModel minimum to 4.0, adding travis config to test both 4.0 and 5.0. (@samlown)
