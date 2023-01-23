@@ -2,6 +2,8 @@ require "hashme/version"
 
 # External dependencies
 
+require "uri"
+
 require "active_model"
 require "active_model/naming"
 require "active_model/serialization"

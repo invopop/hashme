@@ -68,7 +68,7 @@ module Hashme
       def define_property_methods(property)
         # Getter
         define_method(property.name) do
-          get_attribute(property.name) || property.default
+          get_attribute(property.name)
         end
         # Setter
         define_method "#{property.name}=" do |value|

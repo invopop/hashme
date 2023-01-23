@@ -117,6 +117,12 @@ describe Hashme::Properties do
       expect(obj.nickname).to be_nil
     end
 
+    it 'should not return the default value when a Boolean is set to false' do
+      model.property :flag, TrueClass, :default => true
+      obj.flag = false
+      expect(obj.flag).to be(false)
+    end
+
     it "should create helper method with support for default values" do
       model.property :name, String, :default => "Sam"
       expect(obj.name).to eql("Sam")

@@ -12,10 +12,11 @@ class Course
   property :started_on, Date
   property :updated_at, DateTime
   property :active, TrueClass
-  property :very_active, TrueClass
+  property :very_active, Boolean
   property :klass, Class
   property :currency, String, :default => 'EUR'
   property :symbol, Symbol
+  property :uri, URI
 end
 
 describe Hashme::PropertyCasting do
@@ -598,19 +599,19 @@ describe Hashme::PropertyCasting do
     end
   end
 
-  describe 'when type primitive is a Boolean' do
+  describe 'when type primitive is a TrueClass' do
 
     [ true, 'true', 'TRUE', '1', 1, 't', 'T' ].each do |value|
       it "returns true when value is #{value.inspect}" do
         course.active = value
-        expect(course['active']).to be_truthy
+        expect(course['active']).to be(true)
       end
     end
 
     [ false, 'false', 'FALSE', '0', 0, 'f', 'F' ].each do |value|
       it "returns false when value is #{value.inspect}" do
         course.active = value
-        expect(course['active']).to be_falsey
+        expect(course['active']).to be(false)
       end
     end
 
@@ -619,6 +620,30 @@ describe Hashme::PropertyCasting do
         course.active = value
         expect(course['active']).to be_nil
       end
+    end
+
+    it "supports Boolean as an alias of TrueClass" do
+      course.very_active = 't'
+      expect(course['very_active']).to be(true)
+    end
+
+  end
+
+  describe 'when type primitive is an URI' do
+    it 'returns same value if an uri' do
+      value = URI('https://invopop.com')
+      course.uri = value
+      expect(course['uri']).to equal(value)
+    end
+
+    it 'returns an URI if parses as one' do
+      course.uri = 'https://invopop.com'
+      expect(course['uri']).to eql(URI('https://invopop.com'))
+    end
+
+    it 'does not typecast non-uri values' do
+      course.uri = 1234
+      expect(course['uri']).to be_nil
     end
   end
 end
